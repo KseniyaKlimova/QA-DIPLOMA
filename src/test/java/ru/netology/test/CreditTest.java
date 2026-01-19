@@ -39,10 +39,10 @@ public class CreditTest {
     void shouldPayByApprovedCardCreditStatusDB() {
         formPage.buyOnCredit();
         formPage.setCardNumber(DataHelper.generateApprovedCardNumber());
-        formPage.setCardMonth(DataHelper.generateRandomValidMonth());
-        formPage.setCardYear(DataHelper.generateRandomValidYear());
-        formPage.setCardOwner(DataHelper.generateRandomValidOwnerName());
-        formPage.setCardCVV(DataHelper.generateRandomValidCVV());
+        formPage.setCardMonth(DataHelper.generateMonth());
+        formPage.setCardYear(DataHelper.generateYear());
+        formPage.setCardOwner(DataHelper.generateValidOwner());
+        formPage.setCardCVV(DataHelper.generateValidCVV());
         formPage.pushContinueButton();
         formPage.checkMessageSuccess();
         DBUtils.checkCreditStatus(Status.APPROVED);
@@ -53,10 +53,10 @@ public class CreditTest {
     void shouldPayByDeclinedCardInCreditStatusInDB() {
         formPage.buyOnCredit();
         formPage.setCardNumber(DataHelper.generateDeclinedCardNumber());
-        formPage.setCardMonth(DataHelper.generateRandomValidMonth());
-        formPage.setCardYear(DataHelper.generateRandomValidYear());
-        formPage.setCardOwner(DataHelper.generateRandomValidOwnerName());
-        formPage.setCardCVV(DataHelper.generateRandomValidCVV());
+        formPage.setCardMonth(DataHelper.generateMonth());
+        formPage.setCardYear(DataHelper.generateYear());
+        formPage.setCardOwner(DataHelper.generateValidOwner());
+        formPage.setCardCVV(DataHelper.generateValidCVV());
         formPage.pushContinueButton();
         formPage.checkMessageError();
         DBUtils.checkCreditStatus(Status.DECLINED);
@@ -66,11 +66,11 @@ public class CreditTest {
     @DisplayName("Payment through card with 15 symbols")
     void shouldPayNotFullCard() {
         formPage.buyOnCredit();
-        formPage.setCardNumber(DataHelper.generateInvalidCardNumberWithShortLength());
-        formPage.setCardMonth(DataHelper.generateRandomValidMonth());
-        formPage.setCardYear(DataHelper.generateRandomValidYear());
-        formPage.setCardOwner(DataHelper.generateRandomValidOwnerName());
-        formPage.setCardCVV(DataHelper.generateRandomValidCVV());
+        formPage.setCardNumber(DataHelper.generateInvalidCardNumberWithShortLength15());
+        formPage.setCardMonth(DataHelper.generateMonth());
+        formPage.setCardYear(DataHelper.generateYear());
+        formPage.setCardOwner(DataHelper.generateValidOwner());
+        formPage.setCardCVV(DataHelper.generateValidCVV());
         formPage.pushContinueButton();
         formPage.checkInputSubMessage("Неверный формат");
     }
@@ -79,11 +79,11 @@ public class CreditTest {
     @DisplayName("Payment through invalid card number")
     void shouldPayInvalidCardNumber() {
         formPage.buyOnCredit();
-        formPage.setCardNumber(DataHelper.generateInvalidCardNumberWithLettersOrSymbols());
-        formPage.setCardMonth(DataHelper.generateRandomValidMonth());
-        formPage.setCardYear(DataHelper.generateRandomValidYear());
-        formPage.setCardOwner(DataHelper.generateRandomValidOwnerName());
-        formPage.setCardCVV(DataHelper.generateRandomValidCVV());
+        formPage.setCardNumber(DataHelper.generateInvalidCardNumberWithLetters());
+        formPage.setCardMonth(DataHelper.generateMonth());
+        formPage.setCardYear(DataHelper.generateYear());
+        formPage.setCardOwner(DataHelper.generateValidOwner());
+        formPage.setCardCVV(DataHelper.generateValidCVV());
         formPage.pushContinueButton();
         formPage.checkInputSubMessage("Неверный формат");
     }
@@ -93,10 +93,10 @@ public class CreditTest {
     void shouldNotAllow17DigitsInCardNumber() {
         formPage.buyOnCredit();
         formPage.setCardNumber(DataHelper.generateInvalidCardNumberWithLongLength());
-        formPage.setCardMonth(DataHelper.generateRandomValidMonth());
-        formPage.setCardYear(DataHelper.generateRandomValidYear());
-        formPage.setCardOwner(DataHelper.generateRandomValidOwnerName());
-        formPage.setCardCVV(DataHelper.generateRandomValidCVV());
+        formPage.setCardMonth(DataHelper.generateMonth());
+        formPage.setCardYear(DataHelper.generateYear());
+        formPage.setCardOwner(DataHelper.generateValidOwner());
+        formPage.setCardCVV(DataHelper.generateValidCVV());
         formPage.pushContinueButton();
         formPage.checkMessageSuccess();
     }
@@ -106,10 +106,10 @@ public class CreditTest {
     void shouldPayInvalidMonth() {
         formPage.buyOnCredit();
         formPage.setCardNumber(DataHelper.generateApprovedCardNumber());
-        formPage.setCardMonth(DataHelper.generateInvalidMonth());
-        formPage.setCardYear(DataHelper.generateRandomValidYear());
-        formPage.setCardOwner(DataHelper.generateRandomValidOwnerName());
-        formPage.setCardCVV(DataHelper.generateRandomValidCVV());
+        formPage.setCardMonth(DataHelper.generateInvalidMonth13());
+        formPage.setCardYear(DataHelper.generateYear());
+        formPage.setCardOwner(DataHelper.generateValidOwner());
+        formPage.setCardCVV(DataHelper.generateValidCVV());
         formPage.pushContinueButton();
         formPage.checkInputSubMessage("Неверно указан срок действия карты");
     }
@@ -120,9 +120,9 @@ public class CreditTest {
         formPage.buyOnCredit();
         formPage.setCardNumber(DataHelper.generateApprovedCardNumber());
         formPage.setCardMonth(DataHelper.generateInvalidMonthZero());
-        formPage.setCardYear(DataHelper.generateRandomValidYear());
-        formPage.setCardOwner(DataHelper.generateRandomValidOwnerName());
-        formPage.setCardCVV(DataHelper.generateRandomValidCVV());
+        formPage.setCardYear(DataHelper.generateYear());
+        formPage.setCardOwner(DataHelper.generateValidOwner());
+        formPage.setCardCVV(DataHelper.generateValidCVV());
         formPage.pushContinueButton();
         formPage.checkInputSubMessage("Неверно указан срок действия карты");
     }
@@ -132,10 +132,10 @@ public class CreditTest {
     void shouldPayInvalidYear() {
         formPage.buyOnCredit();
         formPage.setCardNumber(DataHelper.generateApprovedCardNumber());
-        formPage.setCardMonth(DataHelper.generateRandomValidMonth());
+        formPage.setCardMonth(DataHelper.generateMonth());
         formPage.setCardYear(DataHelper.generateExpiredYear());
-        formPage.setCardOwner(DataHelper.generateRandomValidOwnerName());
-        formPage.setCardCVV(DataHelper.generateRandomValidCVV());
+        formPage.setCardOwner(DataHelper.generateValidOwner());
+        formPage.setCardCVV(DataHelper.generateValidCVV());
         formPage.pushContinueButton();
         formPage.checkInputSubMessage("Истёк срок действия карты");
     }
@@ -145,10 +145,10 @@ public class CreditTest {
     void shouldPayInvalidYear00() {
         formPage.buyOnCredit();
         formPage.setCardNumber(DataHelper.generateApprovedCardNumber());
-        formPage.setCardMonth(DataHelper.generateRandomValidMonth());
+        formPage.setCardMonth(DataHelper.generateMonth());
         formPage.setCardYear(DataHelper.generateInvalidYearZero());
-        formPage.setCardOwner(DataHelper.generateRandomValidOwnerName());
-        formPage.setCardCVV(DataHelper.generateRandomValidCVV());
+        formPage.setCardOwner(DataHelper.generateValidOwner());
+        formPage.setCardCVV(DataHelper.generateValidCVV());
         formPage.pushContinueButton();
         formPage.checkInputSubMessage("Истёк срок действия карты");
     }
@@ -158,10 +158,10 @@ public class CreditTest {
     void shouldPayCyrillicCardOwner() {
         formPage.buyOnCredit();
         formPage.setCardNumber(DataHelper.generateApprovedCardNumber());
-        formPage.setCardMonth(DataHelper.generateRandomValidMonth());
-        formPage.setCardYear(DataHelper.generateRandomValidYear());
-        formPage.setCardOwner("Иван Иванов");
-        formPage.setCardCVV(DataHelper.generateRandomValidCVV());
+        formPage.setCardMonth(DataHelper.generateMonth());
+        formPage.setCardYear(DataHelper.generateYear());
+        formPage.setCardOwner(DataHelper.generateInvalidOwnerWithCyrillicSymbols());
+        formPage.setCardCVV(DataHelper.generateValidCVV());
         formPage.pushContinueButton();
         formPage.checkMessageError();
     }
@@ -171,10 +171,10 @@ public class CreditTest {
     void shouldPayInvalidCardOwner() {
         formPage.buyOnCredit();
         formPage.setCardNumber(DataHelper.generateApprovedCardNumber());
-        formPage.setCardMonth(DataHelper.generateRandomValidMonth());
-        formPage.setCardYear(DataHelper.generateRandomValidYear());
-        formPage.setCardOwner(DataHelper.generateInvalidOwnerName());
-        formPage.setCardCVV(DataHelper.generateRandomValidCVV());
+        formPage.setCardMonth(DataHelper.generateMonth());
+        formPage.setCardYear(DataHelper.generateYear());
+        formPage.setCardOwner(DataHelper.generateInvalidOwner());
+        formPage.setCardCVV(DataHelper.generateValidCVV());
         formPage.pushContinueButton();
         formPage.checkMessageError();
     }
@@ -184,25 +184,26 @@ public class CreditTest {
     void shouldNotAllow4DigitsInCVV() {
         formPage.buyOnCredit();
         formPage.setCardNumber(DataHelper.generateApprovedCardNumber());
-        formPage.setCardMonth(DataHelper.generateRandomValidMonth());
-        formPage.setCardYear(DataHelper.generateRandomValidYear());
-        formPage.setCardOwner(DataHelper.generateRandomValidOwnerName());
-        formPage.setCardCVV(DataHelper.generateFourDigitsCVV());
+        formPage.setCardMonth(DataHelper.generateMonth());
+        formPage.setCardYear(DataHelper.generateYear());
+        formPage.setCardOwner(DataHelper.generateValidOwner());
+        formPage.setCardCVV(DataHelper.generateInvalidCVVWith4Digit());
+        // Смотрим автоматическую обрезку 4-го символа и успешность отправки формы
         formPage.pushContinueButton();
         formPage.checkMessageSuccess();
     }
 
     @Test
-    @DisplayName("Input of value '1000' in 'CVV' string, border check")
-    void shouldNotAllow41000InCVV() {
+    @DisplayName("Input of 2 symbols in 'CVV', string limitation")
+    void shouldNotAllow2DigitsInCVV() {
         formPage.buyOnCredit();
         formPage.setCardNumber(DataHelper.generateApprovedCardNumber());
-        formPage.setCardMonth(DataHelper.generateRandomValidMonth());
-        formPage.setCardYear(DataHelper.generateRandomValidYear());
-        formPage.setCardOwner(DataHelper.generateRandomValidOwnerName());
-        formPage.setCardCVV(DataHelper.generateBoundaryFourDigitCVV());
+        formPage.setCardMonth(DataHelper.generateMonth());
+        formPage.setCardYear(DataHelper.generateYear());
+        formPage.setCardOwner(DataHelper.generateValidOwner());
+        formPage.setCardCVV(DataHelper.generateInvalidCVVWith2Digit());
         formPage.pushContinueButton();
-        formPage.checkMessageSuccess();
+        formPage.checkInputSubMessage("Неверный формат");
     }
 
     @Test
@@ -210,10 +211,10 @@ public class CreditTest {
     void shouldPayEmptyCardNumber() {
         formPage.buyOnCredit();
         formPage.setCardNumber(DataHelper.generateEmptyCardNumber());
-        formPage.setCardMonth(DataHelper.generateRandomValidMonth());
-        formPage.setCardYear(DataHelper.generateRandomValidYear());
-        formPage.setCardOwner(DataHelper.generateRandomValidOwnerName());
-        formPage.setCardCVV(DataHelper.generateRandomValidCVV());
+        formPage.setCardMonth(DataHelper.generateMonth());
+        formPage.setCardYear(DataHelper.generateYear());
+        formPage.setCardOwner(DataHelper.generateValidOwner());
+        formPage.setCardCVV(DataHelper.generateValidCVV());
         formPage.pushContinueButton();
         formPage.checkInputSubMessage("Неверный формат");
     }
@@ -224,9 +225,9 @@ public class CreditTest {
         formPage.buyOnCredit();
         formPage.setCardNumber(DataHelper.generateApprovedCardNumber());
         formPage.setCardMonth(DataHelper.generateEmptyString());
-        formPage.setCardYear(DataHelper.generateRandomValidYear());
-        formPage.setCardOwner(DataHelper.generateRandomValidOwnerName());
-        formPage.setCardCVV(DataHelper.generateRandomValidCVV());
+        formPage.setCardYear(DataHelper.generateYear());
+        formPage.setCardOwner(DataHelper.generateValidOwner());
+        formPage.setCardCVV(DataHelper.generateValidCVV());
         formPage.pushContinueButton();
         formPage.checkInputSubMessage("Неверный формат");
     }
@@ -236,10 +237,10 @@ public class CreditTest {
     void shouldPayEmptyCardYear() {
         formPage.buyOnCredit();
         formPage.setCardNumber(DataHelper.generateApprovedCardNumber());
-        formPage.setCardMonth(DataHelper.generateRandomValidMonth());
+        formPage.setCardMonth(DataHelper.generateMonth());
         formPage.setCardYear(DataHelper.generateEmptyString());
-        formPage.setCardOwner(DataHelper.generateRandomValidOwnerName());
-        formPage.setCardCVV(DataHelper.generateRandomValidCVV());
+        formPage.setCardOwner(DataHelper.generateValidOwner());
+        formPage.setCardCVV(DataHelper.generateValidCVV());
         formPage.pushContinueButton();
         formPage.checkInputSubMessage("Неверный формат");
     }
@@ -249,10 +250,10 @@ public class CreditTest {
     void shouldPayEmptyCardOwner() {
         formPage.buyOnCredit();
         formPage.setCardNumber(DataHelper.generateApprovedCardNumber());
-        formPage.setCardMonth(DataHelper.generateRandomValidMonth());
-        formPage.setCardYear(DataHelper.generateRandomValidYear());
+        formPage.setCardMonth(DataHelper.generateMonth());
+        formPage.setCardYear(DataHelper.generateYear());
         formPage.setCardOwner(DataHelper.generateEmptyString());
-        formPage.setCardCVV(DataHelper.generateRandomValidCVV());
+        formPage.setCardCVV(DataHelper.generateValidCVV());
         formPage.pushContinueButton();
         formPage.checkInputSubMessage("Поле обязательно для заполнения");
     }
@@ -262,9 +263,9 @@ public class CreditTest {
     void shouldPayEmptyCardCVV() {
         formPage.buyOnCredit();
         formPage.setCardNumber(DataHelper.generateApprovedCardNumber());
-        formPage.setCardMonth(DataHelper.generateRandomValidMonth());
-        formPage.setCardYear(DataHelper.generateRandomValidYear());
-        formPage.setCardOwner(DataHelper.generateRandomValidOwnerName());
+        formPage.setCardMonth(DataHelper.generateMonth());
+        formPage.setCardYear(DataHelper.generateYear());
+        formPage.setCardOwner(DataHelper.generateValidOwner());
         formPage.setCardCVV(DataHelper.generateEmptyString());
         formPage.pushContinueButton();
         formPage.checkInputSubMessage("Неверный формат");

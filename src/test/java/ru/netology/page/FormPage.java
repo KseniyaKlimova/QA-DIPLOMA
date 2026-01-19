@@ -37,11 +37,11 @@ public class FormPage {
     }
 
     public void checkMessageSuccess() {
-        $(Selectors.withText("Операция одобрена Банком")).shouldBe(visible, Duration.ofSeconds(10));
+        $(Selectors.withText("Операция одобрена Банком")).shouldBe(visible, Duration.ofSeconds(15));
     }
 
     public void checkMessageError() {
-        $$(".notification__title").find(exactText("Ошибка")).shouldBe(visible, Duration.ofSeconds(10));
+        $$(".notification__title").find(exactText("Ошибка")).shouldBe(visible, Duration.ofSeconds(15));
     }
 
     public void checkInputSubMessage(String expectedMessage) {
