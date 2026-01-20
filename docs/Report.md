@@ -17,19 +17,21 @@
 Всего выполнено 36 автоматизированных тест-кейсов
 
 ### % успешных/не успешных
-* 25 успешных – 69 % от общего процента кейсов
-* 11 не успешных – 31 % от общего процента кейсов
-<img width="1365" height="643" alt="Allure1" src="https://github.com/user-attachments/assets/37cf9976-177c-41a6-85ce-7ceaf4b1af2d" />
-<img width="1365" height="643" alt="Allure2" src="https://github.com/user-attachments/assets/856d7ead-8a0c-4fe3-880a-a88e3f087435" />
-<img width="1364" height="640" alt="Allure4" src="https://github.com/user-attachments/assets/5e6413f6-baba-44bf-ac61-216f9633ca89" />
+* 26 успешных – 72 % от общего процента кейсов
+* 10 не успешных – 28 % от общего процента кейсов
+<img width="1352" height="643" alt="AllureNew" src="https://github.com/user-attachments/assets/437c6cc9-f3b2-4e67-899a-b4e518f42839" />
+<img width="1230" height="633" alt="AllureNew1" src="https://github.com/user-attachments/assets/4a702af8-1592-468d-a95b-b847c9fdff17" />
+<img width="1187" height="640" alt="AllureNew2" src="https://github.com/user-attachments/assets/5a52a664-5a85-4d87-a287-d6ed883bf650" />
+
 
 ### Найденные дефекты
 
-* В поле "Владелец" нет никаких ограничений на ввод, при этом запрос с некорректными данными успешно отправляется, код ответа сервера - 200 (severity=critical!)
- <img width="1365" height="641" alt="Allure3" src="https://github.com/user-attachments/assets/cfe002ba-cbaf-4c30-8469-af4f357afb42" />
+* При вводе в поле "Владелец" данных на кириллице, запрос с некорректными данными успешно отправляется, сообщения об ошибке нет (severity=critical!)
+<img width="1364" height="642" alt="AllureNew4" src="https://github.com/user-attachments/assets/4653c11f-1751-4d68-b803-81f2887d2000" />
+
 
 * Не выводится предупреждение о том, что введены неверные данные, если указать месяц 00, при этом запрос отправляется (severity=major)
-<img width="1364" height="640" alt="Allure4" src="https://github.com/user-attachments/assets/829e8b7b-0566-41dc-9f42-dad8f6fa4571" />
+<img width="1359" height="641" alt="AllureNew3" src="https://github.com/user-attachments/assets/7f1c9729-3eb7-4798-b0ae-6f8953b7fa5d" />
 
 Найденные баги описаны в разделе Issues.
 
